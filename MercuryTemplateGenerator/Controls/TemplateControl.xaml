@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="MercuryTemplateGenerator.Controls.TemplateControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MercuryTemplateGenerator.Controls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" d:DesignWidth="1024" Height="211.07">
+    <StackPanel>
+        <Border BorderBrush="#FFFFCD00" BorderThickness="1" Margin="0 20 0 0" >
+            <StackPanel Margin="0,10,0,9">
+                <Label Content="Template" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Name"  Margin="40 0 0 0"/>
+                    <TextBox Width="300"/>
+                    <Label Content="Width"/>
+                    <TextBox Width="100" />
+                    <Label Content="px" />
+                    <Label Content="Height"/>
+                    <TextBox Width="100" />
+                    <Label Content="px" />
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="40 20 0 0">
+                        <Label Content="Zones" />
+                        <Button Width="100" Style="{StaticResource RoundButtonTemplate}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="Plus" Margin="0 0 10 0" Opacity="0.5"/>
+                                <TextBlock Text="Add Zone" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Name="zoneSPContainer"></StackPanel>
+                </StackPanel>
+
+                <Separator Margin="10" Opacity="0.5" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 0">
+                    <Button Name="removeTemplate" Width="150" Height="30" Style="{StaticResource RoundButtonTemplate}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Remove" FontSize="20" VerticalAlignment="Center" Opacity="0.5" Margin="0 0 10 0"/>
+                            <TextBlock Text="Delete Template" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
