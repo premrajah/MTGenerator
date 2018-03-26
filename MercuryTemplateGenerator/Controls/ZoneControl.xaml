@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MercuryTemplateGenerator.Controls"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" d:DesignWidth="1024" Height="112.407">
+             mc:Ignorable="d" d:DesignWidth="1024" Height="100">
     <StackPanel>
-        <Separator Margin="6" Opacity="0.5" />
-        <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-            <Label Content="Zone Name" />
-            <TextBox Width="200" />
+        <Separator Margin="0 6 0 10" Opacity="0.5" />
+        <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+            <Label Content="Zone Name" Width="80"/>
+            <TextBox Width="200"/>
             <Label Content="width" />
             <TextBox Width="100" />
             <Label Content="px" />
@@ -24,8 +24,8 @@
             <TextBox Width="100" />
             <Label Content="px" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="20 20 0 0">
-            <Label Content="Transitions" />
+        <DockPanel Margin="30 10 0 0">
+            <Label Content="Transitions" Width="80" />
             <ComboBox Width="150">
                 <ComboBoxItem>Fade out - In</ComboBoxItem>
                 <ComboBoxItem>Crossfade</ComboBoxItem>
@@ -34,6 +34,18 @@
             <Label Content="Transition Duration" />
             <TextBox Width="100" />
             <Label Content="Milliseconds" />
-        </StackPanel>
+            <Button Width="120" 
+                    Style="{StaticResource DeleteButtonTemplate}" 
+                    Click="removeZoneBtn_Click"
+                    HorizontalAlignment="Right"
+                    Margin="0 0 10 0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Remove" />
+                    <TextBlock Text="Remove Zone" Margin="10 0 0 0" />
+                </StackPanel>
+            </Button>
+        </DockPanel>
+        <Separator Margin="0 10 0 0" Opacity="0.5" />
     </StackPanel>
+    
 </UserControl>

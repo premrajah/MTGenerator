@@ -20,9 +20,32 @@ namespace MercuryTemplateGenerator.Controls
     /// </summary>
     public partial class ZoneControl : UserControl
     {
-        public ZoneControl()
+        TemplateModel _parentModel;
+        
+
+
+        public ZoneControl(TemplateModel ParentModel)
         {
+            _parentModel = ParentModel;
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Button to remove a zone from the screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void removeZoneBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult msgResult = MessageBox.Show("Are you sure?", "Delete zone", MessageBoxButton.YesNo);
+
+            if (msgResult == MessageBoxResult.Yes)
+            {
+                if (_parentModel != null)
+                {
+                    _parentModel.ZoneControls.Remove(this);
+                }
+            }
         }
     }
 }
