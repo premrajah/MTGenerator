@@ -7,15 +7,17 @@ using System.ComponentModel;
 
 namespace MercuryTemplateGenerator.Model
 {
-    public class Zone : CommonElements 
+    public class Zone : CommonElements
     {
         string _name;
         int _width;
         int _height;
         int _xLocation;
         int _yLocation;
+        string[] _transitions = new string[] {"FadeOutIn", "Crossfade", "Cut"};
+        int _transitionDuration;
 
-        public string Name
+        public new string Name
         {
             get { return _name; }
             set
@@ -25,7 +27,7 @@ namespace MercuryTemplateGenerator.Model
             }
         }
 
-        public int Width
+        public new int Width
         {
             get { return _width; }
             set
@@ -35,7 +37,7 @@ namespace MercuryTemplateGenerator.Model
             }
         }
 
-        public int Height
+        public new int Height
         {
             get { return _height; }
             set
@@ -64,6 +66,27 @@ namespace MercuryTemplateGenerator.Model
                 OnPropertyChanged("YLocation");
             }
         }
-        
+
+        public string[] Transitions
+        {
+            get { return _transitions; }
+            set
+            {
+                _transitions = value;
+                OnPropertyChanged("Transitions");
+            }
+        }
+
+        public int TransitionDuration
+        {
+            get { return _transitionDuration; }
+            set
+            {
+                _transitionDuration = value;
+                OnPropertyChanged("TransitionsDuration");
+            }
+        }
+
+
     }
 }

@@ -69,6 +69,7 @@ namespace MercuryTemplateGenerator.Controls
         private void addZoneBtn_Click(object sender, RoutedEventArgs e)
         {
             TemplateModel.ZoneControls.Add(new ZoneControl(TemplateModel));
+            
         }
     }
 
@@ -77,17 +78,13 @@ namespace MercuryTemplateGenerator.Controls
     /// </summary>
     public class TemplateModel : INotifyPropertyChanged
     {
-        ObservableCollection<ZoneControl> _ZoneControls = new ObservableCollection<ZoneControl>();
 
+       
         CommonElements _TemplateData = new CommonElements();
-
 
         public CommonElements TemplateData
         {
-            get
-            {
-                return _TemplateData;
-            }
+            get { return _TemplateData; }
             set
             {
                 _TemplateData = value;
@@ -99,6 +96,7 @@ namespace MercuryTemplateGenerator.Controls
         }
 
 
+        ObservableCollection<ZoneControl> _ZoneControls = new ObservableCollection<ZoneControl>();
 
         public ObservableCollection<ZoneControl> ZoneControls
         {
@@ -109,6 +107,9 @@ namespace MercuryTemplateGenerator.Controls
                 OnPropertyChanged("ZoneControls");
             }
         }
+
+    
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -4,35 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MercuryTemplateGenerator.Controls"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
+            xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" d:DesignWidth="1024" Height="100">
+    <UserControl.DataContext>
+        <local:ZoneModel />
+    </UserControl.DataContext>
     <StackPanel>
         <Separator Margin="0 6 0 10" Opacity="0.5" />
         <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
             <Label Content="Zone Name" Width="80"/>
-            <TextBox Width="200"/>
+            <TextBox Width="200" Text="{Binding ZoneData.Name}" />
             <Label Content="width" />
-            <TextBox Width="100" />
+            <TextBox Width="100" Text="{Binding ZoneData.Width}" />
             <Label Content="px" />
             <Label Content="Height" />
-            <TextBox Width="100" />
+            <TextBox Width="100" Text="{Binding ZoneData.Height}" />
             <Label Content="px" />
             <Label Content="X" />
-            <TextBox Width="100" />
+            <TextBox Width="100" Text="{Binding ZoneData.XLocation}" />
             <Label Content="px" />
             <Label Content="Y" />
-            <TextBox Width="100" />
+            <TextBox Width="100" Text="{Binding ZoneData.YLocation}" />
             <Label Content="px" />
         </StackPanel>
         <DockPanel Margin="30 10 0 0">
             <Label Content="Transitions" Width="80" />
-            <ComboBox Width="150">
-                <ComboBoxItem>Fade out - In</ComboBoxItem>
-                <ComboBoxItem>Crossfade</ComboBoxItem>
-                <ComboBoxItem>Cut</ComboBoxItem>
-            </ComboBox>
+            <ComboBox Width="150" 
+                      ItemsSource="{Binding ZoneData.Transitions}"
+                      IsSynchronizedWithCurrentItem="True" 
+                      VerticalContentAlignment="Center" />
             <Label Content="Transition Duration" />
-            <TextBox Width="100" />
+            <TextBox Width="100" Text="{Binding ZoneData.TransitionDuration}" />
             <Label Content="Milliseconds" />
             <Button Width="120" 
                     Style="{StaticResource DeleteButtonTemplate}" 

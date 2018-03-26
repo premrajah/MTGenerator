@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.IO;
+using MercuryTemplateGenerator.Controls;
 
 using Winforms = System.Windows.Forms;
 
@@ -17,16 +18,14 @@ namespace MercuryTemplateGenerator.Model
 {
     public class Model : INotifyPropertyChanged
     {
-
-        #region Properties
+        
 
         string _projectLocation;
         string _projectName;
-        ObservableCollection<Controls.TemplateControl> _templateControls = new ObservableCollection<Controls.TemplateControl>();
+        ObservableCollection<TemplateControl> _templateControls = new ObservableCollection<TemplateControl>();
+       
 
         
-
-        #endregion
         
         public Model() { } // Constructor
 
@@ -37,11 +36,10 @@ namespace MercuryTemplateGenerator.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-
-        #region Getters and Setters
         
         
-        public ObservableCollection<Controls.TemplateControl> TemplateControls
+        
+        public ObservableCollection<TemplateControl> TemplateControls
         {
             get { return _templateControls; }
             set
@@ -50,6 +48,7 @@ namespace MercuryTemplateGenerator.Model
                 OnPropertyChanged("TemplateControls");
             }
         }
+        
 
         public string ProjectName
         {
@@ -71,8 +70,7 @@ namespace MercuryTemplateGenerator.Model
 
             }
         }
-
-        #endregion
+        
 
 
 
@@ -106,18 +104,21 @@ namespace MercuryTemplateGenerator.Model
                 string projectRoot = $"{ProjectLocation ?? desktopPath}\\{ProjectName ?? "DefaultProject"}";
                 
 
-                // Loop through templates
+                // Iterate over templates and generate folders
                 foreach (var template in TemplateControls)
                 {
-
                     string templatePath = $"{projectRoot}\\{template.TemplateModel.TemplateData.Name}";
                     //Directory.CreateDirectory(templatePath);
                     Debug.WriteLine(templatePath);
 
-                    
-                    
 
-                    
+                    // Iterate over the zones and generate folders
+                    foreach (var zone in template.TemplateModel.ZoneControls)
+                    {
+                        string zonePath = $"{templatePath}\\{zone.ZoneModel.ZoneData.Name}";
+                        //Directory.CreateDirectory(zonePath);
+                        Debug.WriteLine(zone.ZoneModel.ZoneData.Name);
+                    }
                 }
 
             }
