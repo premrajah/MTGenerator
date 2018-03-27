@@ -60,18 +60,6 @@ namespace MercuryTemplateGenerator
         /// <param name="e"></param>
         private void generateFiles_Click(object sender, RoutedEventArgs e)
         {
-            //foreach (var template in _dataContext.TemplateControls)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(template.TemplateModel.TemplateData.Name);
-            //}
-
-            //var Test2 = _dataContext.TemplateControls.FirstOrDefault(a => a.TemplateModel.TemplateData.Name == "Test2");
-            //if (Test2 != null)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(Test2.TemplateModel.TemplateData.Width);
-            //}
-
-
             _dataContext.GenerateFilesAndFolders();
         }
     }

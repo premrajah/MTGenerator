@@ -22,7 +22,7 @@ namespace MercuryTemplateGenerator.Model
             get { return _name; }
             set
             {
-                _name = value;
+                _name = Model.UppercaseWordsAndRemoveSpaces(value);
                 OnPropertyChanged("Name");
             }
         }

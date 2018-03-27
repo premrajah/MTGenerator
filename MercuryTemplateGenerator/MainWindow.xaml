@@ -58,12 +58,14 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Label Width="150"  Content="Project Name"/>
                 <TextBox Width="630"
-                         Text="{Binding ProjectName}"/>
+                         Text="{Binding ProjectName}"
+                         Name="projectNameTBox"/>
                 <Button Name="addTemplateBtn" 
                         Width="150" 
                         Height="30" 
                         Margin="40 0 0 0"
-                        Style="{StaticResource RoundButtonTemplate}" Click="addTemplateBtn_Click">
+                        Style="{StaticResource RoundButtonTemplate}" 
+                        Click="addTemplateBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="File" Margin="0 0 10 0"/>
                         <TextBlock  Text="Add Template" />
@@ -81,12 +83,14 @@
             </Grid>
         </Grid>
 
-        <StackPanel Grid.Row="2" VerticalAlignment="Center">
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button
                 Width="300" 
                 Height="36"
                 Style="{StaticResource RoundButtonTemplate}"
-                Name="generateFiles" Click="generateFiles_Click">
+                Name="generateFiles" Click="generateFiles_Click"
+                ToolTip="Generate project files and folders"
+                Opacity="{Binding ElementName=projectNameTBox, Path=Text.Length}">
                 <StackPanel Orientation="Horizontal">
                     <fa:FontAwesome Icon="Plus" Margin="0 0 10 0"/>
                     <TextBlock Text="Generate Files and Folders" />
