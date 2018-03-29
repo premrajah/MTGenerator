@@ -107,7 +107,7 @@ namespace MercuryTemplateGenerator.Model
             {
                 string _desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 string _projectRoot = $"{ProjectLocation ?? _desktopPath}\\{ProjectName}";
-                
+
 
 
 
@@ -120,81 +120,90 @@ namespace MercuryTemplateGenerator.Model
                 string _videoPath = CreateFolderInProjectRoot("Videos");
 
                 #endregion
-                
+
 
                 if (!String.IsNullOrWhiteSpace(ProjectName))
                 {
 
-                    //Directory.CreateDirectory(_projectRoot);
-                    Debug.WriteLine(_projectRoot);
-                    
+                    Directory.CreateDirectory(_projectRoot);
+                    //Debug.WriteLine(_projectRoot);
+
 
                     // Check if main template directory exists
                     if (Directory.Exists(_projectRoot))
                     {
-                        Directory.CreateDirectory(_docPath);            
-                        Directory.CreateDirectory(_imagePath);          
-                        Directory.CreateDirectory(_dataPath);
-                        Directory.CreateDirectory(_videoPath);
-                        Directory.CreateDirectory(_jsPath);
 
-                        if (Directory.Exists(_jsPath))
+                        // Iterate over templates and generate folders
+                        foreach (var template in TemplateControls)
                         {
-                            CopyFilesFromFolderToFolder(_mercuryJSFiles, _jsPath);
-                            DownloadRootJSFiles(_jsPath);
-                        }
-                    }
+                            string _templateNameValue = template.TemplateModel.TemplateData.Name;
+                            string _templatePath = $"{_projectRoot}\\Templates\\{_templateNameValue}";
 
-                    // Iterate over templates and generate folders
-                    foreach (var template in TemplateControls)
-                    {
-                        string _templateNameValue = template.TemplateModel.TemplateData.Name;
-                        string _templatePath = $"{_projectRoot}\\Templates\\{_templateNameValue}";
-
-                        if (!String.IsNullOrWhiteSpace(_templateNameValue))
-                        {
-                            Directory.CreateDirectory(_templatePath);  
-
-                            if (Directory.Exists(_templatePath))
+                            if (!String.IsNullOrWhiteSpace(_templateNameValue))
                             {
-                                string _cssFolder = CreateFolderInTemplates(_templatePath, "css");
-                                string _jsFolder = CreateFolderInTemplates(_templatePath, "js");
-                                string _imgFOlder = CreateFolderInTemplates(_templatePath, "img");
 
-                                Directory.CreateDirectory(_cssFolder);
-                                Directory.CreateDirectory(_jsFolder);
-                                Directory.CreateDirectory(_imgFOlder);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Please enter a template name for all templates");
-                        }
-                        
-                        // Iterate over the zones and generate folders
-                        foreach (var zone in template.TemplateModel.ZoneControls)
-                        {
-                            string _zoneNameValue = zone.ZoneModel.ZoneData.Name;
-                            string _zonePath = $"{_templatePath}\\{_zoneNameValue}";
+                                Directory.CreateDirectory(_templatePath);
 
-                            if (!String.IsNullOrWhiteSpace(_zoneNameValue))
-                            {
-                                Directory.CreateDirectory(_zonePath);
+                                if (Directory.Exists(_templatePath))
+                                {
+                                    string _cssFolder = CreateFolderInTemplates(_templatePath, "css");
+                                    string _jsFolder = CreateFolderInTemplates(_templatePath, "js");
+                                    string _imgFOlder = CreateFolderInTemplates(_templatePath, "img");
+
+
+                                    Directory.CreateDirectory(_docPath);
+                                    Directory.CreateDirectory(_imagePath);
+                                    Directory.CreateDirectory(_dataPath);
+                                    Directory.CreateDirectory(_videoPath);
+                                    Directory.CreateDirectory(_jsPath);
+
+                                    if (Directory.Exists(_jsPath))
+                                    {
+                                        CopyFilesFromFolderToFolder(_mercuryJSFiles, _jsPath);
+                                        DownloadRootJSFiles(_jsPath);
+                                    }
+
+
+
+                                    Directory.CreateDirectory(_cssFolder);
+                                    Directory.CreateDirectory(_jsFolder);
+                                    Directory.CreateDirectory(_imgFOlder);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Please enter zone names for all zones");
+                                MessageBox.Show($"Please enter a template name for all templates");
                             }
-                            
+
+                            // Iterate over the zones and generate folders
+                            foreach (var zone in template.TemplateModel.ZoneControls)
+                            {
+                                string _zoneNameValue = zone.ZoneModel.ZoneData.Name;
+                                string _zonePath = $"{_templatePath}\\{_zoneNameValue}";
+
+                                if (!String.IsNullOrWhiteSpace(_zoneNameValue))
+                                {
+                                    Directory.CreateDirectory(_zonePath);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Please enter zone names for all zones");
+                                }
+
+                            }
                         }
-                        
+
+
+
                     }
+
+
                 }
                 else
                 {
                     MessageBox.Show("Please enter a project name.");
                 }
-                
+
 
                 // Open folder project folder 
                 // Process.Start(projectRoot);
@@ -222,7 +231,7 @@ namespace MercuryTemplateGenerator.Model
                 Debug.WriteLine(ex.StackTrace);
             }
         }
-        
+
 
         /// <summary>
         /// Captilize first letter and remove spaces
@@ -308,7 +317,7 @@ namespace MercuryTemplateGenerator.Model
 
                 Debug.WriteLine(ex.Message);
             }
-            
+
         }
 
 
@@ -345,7 +354,7 @@ namespace MercuryTemplateGenerator.Model
 
 
 
-        
+
 
 
 

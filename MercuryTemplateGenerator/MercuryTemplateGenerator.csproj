@@ -80,7 +80,6 @@
     <Compile Include="Controls\ZoneControl.xaml.cs">
       <DependentUpon>ZoneControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HTML\IndexFile.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
