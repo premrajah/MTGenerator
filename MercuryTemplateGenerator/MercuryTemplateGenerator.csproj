@@ -80,6 +80,7 @@
     <Compile Include="Controls\ZoneControl.xaml.cs">
       <DependentUpon>ZoneControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HTML\IndexFile.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -117,10 +118,22 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\JSFiles\jquery.MercuryZoneController.js">
+    <Content Include="Resources\MercuryJSFiles\jquery.MercuryZoneController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\JSFiles\MercuryItemData.js">
+    <Content Include="Resources\MercuryJSFiles\MercuryItemData.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OfflineJSRootFiles\handlebars-v4.0.11.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OfflineJSRootFiles\jquery-latest.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OfflineJSRootFiles\moment.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OfflineJSRootFiles\vue.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -26,6 +26,8 @@ namespace MercuryTemplateGenerator.Model
         string _projectName;
         ObservableCollection<TemplateControl> _templateControls = new ObservableCollection<TemplateControl>();
 
+        string _mercuryJSFiles = $"{Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))}\\Resources\\MercuryJSFiles";
+        string _offlineJSFiles = $"{Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))}\\Resources\\OfflineJSRootFiles";
 
 
 
@@ -105,9 +107,9 @@ namespace MercuryTemplateGenerator.Model
             {
                 string _desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 string _projectRoot = $"{ProjectLocation ?? _desktopPath}\\{ProjectName}";
-                string _jsResourceFiles = $"{Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))}\\Resources\\JSFiles";
+                
 
-            
+
 
                 #region --> folders in Project root
 
@@ -118,41 +120,51 @@ namespace MercuryTemplateGenerator.Model
                 string _videoPath = CreateFolderInProjectRoot("Videos");
 
                 #endregion
-
-                CopyFilesFromFolderToFolder(_jsResourceFiles, "Copy");
+                
 
                 if (!String.IsNullOrWhiteSpace(ProjectName))
                 {
 
-                    Directory.CreateDirectory(_projectRoot);
+                    //Directory.CreateDirectory(_projectRoot);
                     Debug.WriteLine(_projectRoot);
                     
 
                     // Check if main template directory exists
                     if (Directory.Exists(_projectRoot))
                     {
-                        //Directory.CreateDirectory(_docPath);
-                        //Directory.CreateDirectory(_imagePath);
-                        //Directory.CreateDirectory(_dataPath);
-                        //Directory.CreateDirectory(_videoPath);
-                        //Directory.CreateDirectory(_jsPath);
+                        Directory.CreateDirectory(_docPath);            
+                        Directory.CreateDirectory(_imagePath);          
+                        Directory.CreateDirectory(_dataPath);
+                        Directory.CreateDirectory(_videoPath);
+                        Directory.CreateDirectory(_jsPath);
 
                         if (Directory.Exists(_jsPath))
                         {
-                            //CopyFilesFromFolderToFolder(_jsResourceFiles, _jsPath);
-                            //DownloadRootJSFiles(_jsPath);
+                            CopyFilesFromFolderToFolder(_mercuryJSFiles, _jsPath);
+                            DownloadRootJSFiles(_jsPath);
                         }
                     }
 
                     // Iterate over templates and generate folders
                     foreach (var template in TemplateControls)
                     {
-                        string templateNameValue = template.TemplateModel.TemplateData.Name;
-                        string templatePath = $"{_projectRoot}\\Templates\\{templateNameValue}";
+                        string _templateNameValue = template.TemplateModel.TemplateData.Name;
+                        string _templatePath = $"{_projectRoot}\\Templates\\{_templateNameValue}";
 
-                        if (!String.IsNullOrWhiteSpace(templateNameValue))
+                        if (!String.IsNullOrWhiteSpace(_templateNameValue))
                         {
-                            Directory.CreateDirectory(templatePath);
+                            Directory.CreateDirectory(_templatePath);  
+
+                            if (Directory.Exists(_templatePath))
+                            {
+                                string _cssFolder = CreateFolderInTemplates(_templatePath, "css");
+                                string _jsFolder = CreateFolderInTemplates(_templatePath, "js");
+                                string _imgFOlder = CreateFolderInTemplates(_templatePath, "img");
+
+                                Directory.CreateDirectory(_cssFolder);
+                                Directory.CreateDirectory(_jsFolder);
+                                Directory.CreateDirectory(_imgFOlder);
+                            }
                         }
                         else
                         {
@@ -162,12 +174,12 @@ namespace MercuryTemplateGenerator.Model
                         // Iterate over the zones and generate folders
                         foreach (var zone in template.TemplateModel.ZoneControls)
                         {
-                            string zoneNameValue = zone.ZoneModel.ZoneData.Name;
-                            string zonePath = $"{templatePath}\\{zoneNameValue}";
+                            string _zoneNameValue = zone.ZoneModel.ZoneData.Name;
+                            string _zonePath = $"{_templatePath}\\{_zoneNameValue}";
 
-                            if (!String.IsNullOrWhiteSpace(zoneNameValue))
+                            if (!String.IsNullOrWhiteSpace(_zoneNameValue))
                             {
-                                //Directory.CreateDirectory(zonePath);
+                                Directory.CreateDirectory(_zonePath);
                             }
                             else
                             {
@@ -192,6 +204,11 @@ namespace MercuryTemplateGenerator.Model
                 string CreateFolderInProjectRoot(string folderName)
                 {
                     return $"{_projectRoot}\\{folderName}";
+                }
+
+                string CreateFolderInTemplates(string path, string folderName)
+                {
+                    return $"{path}\\{folderName}";
                 }
 
 
@@ -285,7 +302,8 @@ namespace MercuryTemplateGenerator.Model
             {
                 if (ex.Message.Contains("404"))
                 {
-                    Debug.WriteLine("URl is invalid");
+                    Debug.WriteLine("URl's are invalid");
+                    MessageBox.Show($"{urlPath}\nURL is invalid", "Warning");
                 }
 
                 Debug.WriteLine(ex.Message);
@@ -327,7 +345,7 @@ namespace MercuryTemplateGenerator.Model
 
 
 
-
+        
 
 
 
